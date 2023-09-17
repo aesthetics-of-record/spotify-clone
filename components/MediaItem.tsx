@@ -1,30 +1,27 @@
-import Image from "next/image";
+import Image from 'next/image';
 
-import useLoadImage from "@/hooks/useLoadImage";
-import { Song } from "@/types";
-// import usePlayer from "@/hooks/usePlayer";
+import useLoadImage from '@/hooks/useLoadImage';
+import { Song } from '@/types';
+import usePlayer from '@/hooks/usePlayer';
 
 interface MediaItemProps {
   data: Song;
   onClick?: (id: string) => void;
 }
 
-const MediaItem: React.FC<MediaItemProps> = ({
-  data,
-  onClick,
-}) => {
-  // const player = usePlayer();
+const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
+  const player = usePlayer();
   const imageUrl = useLoadImage(data);
 
   const handleClick = () => {
     if (onClick) {
       return onClick(data.id);
     }
-  
-    // return player.setId(data.id);
+
+    return player.setId(data.id);
   };
 
-  return ( 
+  return (
     <div
       onClick={handleClick}
       className="
@@ -38,7 +35,7 @@ const MediaItem: React.FC<MediaItemProps> = ({
         rounded-md
       "
     >
-      <div 
+      <div
         className="
           relative 
           rounded-md 
@@ -49,7 +46,7 @@ const MediaItem: React.FC<MediaItemProps> = ({
       >
         <Image
           fill
-          src={imageUrl || "/images/music-placeholder.png"}
+          src={imageUrl || '/images/music-placeholder.png'}
           alt="MediaItem"
           className="object-cover"
         />
@@ -62,6 +59,6 @@ const MediaItem: React.FC<MediaItemProps> = ({
       </div>
     </div>
   );
-}
- 
+};
+
 export default MediaItem;
