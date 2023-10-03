@@ -46,6 +46,8 @@ export const MyUserContextProvider = (props: Props) => {
 
   // console.log(isLoadingUser);
 
+  // 생각해보니 이걸 useEffect에 넣는 이유는 성능 최적화 때문이다.
+  // 첫 렌더링시나 user가 변할 때 한 번만 실행하기 위해서 이런거다.
   useEffect(() => {
     if (user && !isLoadingData && !userDetails && !subscription) {
       setIsLoadingData(true);
